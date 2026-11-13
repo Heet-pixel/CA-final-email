@@ -86,6 +86,8 @@ app.get("/config.js", (req, res) => {
         'window.AVKAS_CONFIG={API_BASE_URL:"",API:{wake:"/api/wake",health:"/api/health",contact:"/api/contact",career:"/api/career"}};\n'
     );
 });
+// Old URL of the partners page -> new URL (keeps old bookmarks / Google links working)
+app.get(["/managing-partners", "/managing-partners.html"], (req, res) => res.redirect(301, "/about-partners.html"));
 // HTML/CSS/JS are not fingerprinted, so they always revalidate (instant when unchanged via ETag, never stale after an edit).
 // Images and the hero video may be cached for a week in production.
 app.use(

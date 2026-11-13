@@ -665,7 +665,7 @@ html.lenis, html.lenis body { height: auto; }
 @media (prefers-reduced-motion: reduce) { .js .why-panel, .js .why-card[data-open="true"] .why-panel, .why-chev, .why-chev::before, .why-chev::after { transition: none; } }
 
 /* =========================================================
-   TEAM - square photo cards (home + About > Managing Partners / Team of Experts)
+   TEAM - square photo cards (home + About > About Partners / Team of Experts)
    ========================================================= */
 .team-section { padding-top: 80px; }
 @media (min-width: 640px) { .team-section.first { padding-top: 112px; } }
@@ -674,16 +674,17 @@ html.lenis, html.lenis body { height: auto; }
 @media (min-width: 640px) { .team-section h2 { font-size: 44px; } }
 .team-grid { display: grid; gap: 40px 16px; }
 .team-grid.partners { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
-.team-grid.experts { display: flex; flex-wrap: wrap; justify-content: center; gap: 40px 24px; }
-.team-grid.experts > div { flex: 0 1 100%; min-width: 0; }
-@media (min-width: 640px) { .team-grid.experts > div { flex-basis: calc(33.333% - 16px); } }
+.team-grid.experts { display: flex; flex-wrap: wrap; justify-content: center; gap: 40px 16px; }
+.team-grid.experts > div { flex: 0 1 calc(50% - 8px); min-width: 0; }
+@media (min-width: 640px) { .team-grid.experts { gap: 40px 24px; } .team-grid.experts > div { flex-basis: calc(33.333% - 16px); } }
 @media (min-width: 1024px) { .team-grid.partners { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
 .team-card { display: block; width: 100%; max-width: 290px; margin-inline: auto; color: inherit; transition: transform .35s ease; }
 .team-card:hover { transform: translateY(-6px); }
 .team-card:focus-visible { outline: 3px solid var(--teal); outline-offset: 6px; border-radius: 14px; }
 .team-card .photo { display: flex; justify-content: center; }
 .team-card .photo img { display: block; width: 80%; max-width: 232px; height: auto; aspect-ratio: 1 / 1; object-fit: cover; object-position: top; background: var(--card); border-radius: 14px 14px 0 0; }
-.team-grid.experts .team-card { max-width: 340px; }
+.team-grid.experts .team-card { max-width: 290px; }
+@media (min-width: 640px) { .team-grid.experts .team-card { max-width: 340px; } }
 .name-card { position: relative; margin-top: -1px; padding: 16px 12px; text-align: center; background: #fff; border-radius: 4px; box-shadow: 0 14px 40px rgba(20,40,60,.10); }
 .name-card b { display: block; font-family: var(--font-display); font-size: 14px; font-weight: 600; text-transform: uppercase; color: var(--ink); }
 .name-card.expert b { text-transform: none; }
