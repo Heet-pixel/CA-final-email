@@ -1,0 +1,70 @@
+/* =========================================================
+   fx.css – scroll animations, floating balls, physics pills
+   ========================================================= */
+
+/* scroll progress bar */
+#fxProgress { position: fixed; top: 0; left: 0; height: 3px; width: 100%; z-index: 2000; transform-origin: 0 50%; transform: scaleX(0); background: linear-gradient(90deg, #1260a8, #18a574, #f08a1c); pointer-events: none; }
+
+/* word-by-word heading reveal */
+.js .fx-split .w { display: inline-block; overflow: hidden; vertical-align: top; padding-bottom: .14em; margin-bottom: -.14em; }
+.js .fx-split .w > span { display: inline-block; transform: translateY(115%) rotate(4deg); transform-origin: 0 100%; transition: transform .9s cubic-bezier(.2,.7,.2,1); transition-delay: calc(var(--i) * 70ms); }
+.js .fx-split.fx-in .w > span { transform: none; }
+
+/* richer reveal variants */
+.js .reveal { transition: opacity .8s ease, transform .9s cubic-bezier(.2,.7,.2,1); }
+.js .reveal.fx-scale { transform: translateY(26px) scale(.96); }
+.js .reveal.fx-scale.in { transform: none; }
+
+/* image parallax */
+.fx-par { will-change: transform; }
+
+/* ---------- Let's talk: floating balls ---------- */
+.talk { position: relative; padding-top: 56px; overflow-x: clip; }
+@supports not (overflow: clip) { .talk { overflow-x: hidden; } }   /* old browsers (.talk has no sticky children) */
+.talk-balls { position: relative; height: 210px; max-width: 1100px; margin: 0 auto; }
+.talk-balls::before { content: ""; position: absolute; left: 50%; top: 36px; width: min(900px, 100%); height: 250px; transform: translateX(-50%); border-radius: 50%; background: radial-gradient(ellipse at 50% 0%, #eef2f6 0%, rgba(238,242,246,.55) 45%, rgba(255,255,255,0) 72%); z-index: 0; }
+.ball { position: absolute; left: 0; top: 0; z-index: 1; will-change: transform; pointer-events: none; }
+.ball > i { display: grid; place-items: center; border-radius: 50%; transform: scale(0); font-style: normal; color: #fff; animation: none; }
+.talk-balls.in .ball > i { animation: ballPop .8s cubic-bezier(.3,1.5,.5,1) both; animation-delay: var(--d, 0s); }
+@keyframes ballPop { from { transform: scale(0); } to { transform: scale(1); } }
+.ball.solid > i { box-shadow: inset -6px -8px 14px rgba(0,0,0,.14), inset 5px 6px 12px rgba(255,255,255,.45), 0 14px 26px rgba(14,58,92,.12); }
+.ball.ring > i { background: transparent !important; border: 6px solid; box-shadow: 0 10px 22px rgba(14,58,92,.08); }
+.ball.soft > i { border: 1px solid #dfe8ee; box-shadow: 0 12px 28px rgba(14,58,92,.08); color: var(--navy); }
+.talk-intro h2 { font-size: clamp(34px, 4.2vw, 52px); line-height: 1.1; }
+.talk-intro p { max-width: 560px; margin-inline: auto; font-size: 14px; }
+.talk-cta { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin-top: 22px; }
+.btn-ghost { display: inline-flex; align-items: center; padding: 10px 22px; border-radius: 999px; border: 1px solid #cfd8de; color: var(--ink); font-size: 13.5px; font-weight: 500; transition: background .25s, border-color .25s, transform .25s; }
+.btn-ghost:hover { background: #f3f6f8; border-color: #aab7c0; transform: translateY(-2px); }
+@media (max-width: 639px) { .talk { padding-top: 40px; } .talk-balls { height: 160px; } .talk-balls::before { top: 24px; height: 190px; } .talk-intro h2 { font-size: 32px; } .talk-intro p { font-size: 13.5px; } }
+
+/* ---------- Taking Brands Further: physics pills ---------- */
+.further { position: relative; padding: 56px 20px 16px; text-align: center; }
+.pill-stage { position: relative; max-width: 1280px; margin: 0 auto; display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; }
+.pill { display: inline-block; white-space: nowrap; padding: 15px 28px; border-radius: 999px; background: #f3f3f3; color: #16212b; font-family: var(--font-display); font-size: 14.5px; font-weight: 500; user-select: none; -webkit-user-select: none; -webkit-tap-highlight-color: transparent; transition: background .2s; }
+.pill:hover { background: #ebecee; }
+.pill-stage.is-physics { display: block; height: clamp(300px, 32vw, 380px); overflow: hidden; touch-action: pan-y; }
+.is-physics .pill { position: absolute; left: 0; top: 0; visibility: hidden; cursor: grab; touch-action: pan-y; will-change: transform; }
+.is-physics .pill.dragging { cursor: grabbing; background: #e6e8ea; z-index: 5; }
+@media (pointer: fine) { .is-physics, .is-physics .pill { cursor: none; } }
+@media (max-width: 639px) { .pill { padding: 10px 18px; font-size: 13.5px; } }
+.further-copy { max-width: 640px; margin: 28px auto 0; }
+.further-copy .tag { display: inline-flex; align-items: center; gap: 6px; padding: 7px 14px; border-radius: 999px; background: #f3f6f8; font-size: 13px; color: var(--ink); }
+.further-copy h2 { margin-top: 14px; font-size: clamp(32px, 4.2vw, 52px); line-height: 1.1; }
+.further-copy p { margin-top: 14px; font-size: 14px; line-height: 1.7; }
+.further-copy .btn-dark { margin-top: 24px; display: inline-flex; }
+
+/* "Drag" cursor */
+.drag-cursor { position: absolute; left: 0; top: 0; z-index: 10; width: 44px; height: 44px; margin: -22px 0 0 -22px; border-radius: 50%; border: 1px solid #000; display: grid; place-items: center; pointer-events: none; opacity: 0; transition: opacity .2s, width .25s, height .25s, margin .25s, background .25s; }
+.drag-cursor::after { content: ""; width: 6px; height: 6px; border-radius: 50%; background: #000; transition: opacity .2s; }
+.drag-cursor span { position: absolute; font-size: 12px; font-weight: 600; color: #fff; opacity: 0; transition: opacity .2s; }
+.drag-cursor.on { opacity: 1; }
+.drag-cursor.big { width: 74px; height: 74px; margin: -37px 0 0 -37px; background: #000; }
+.drag-cursor.big::after { opacity: 0; }
+.drag-cursor.big span { opacity: 1; }
+@media (pointer: coarse) { .drag-cursor { display: none; } }
+
+@media (prefers-reduced-motion: reduce) {
+  #fxProgress { display: none; }
+  .js .fx-split .w > span { transform: none; transition: none; }
+  .ball > i { transform: none; animation: none !important; }
+}
