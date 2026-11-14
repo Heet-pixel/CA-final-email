@@ -102,6 +102,8 @@
   /* ---------- hero video: play only while visible ---------- */
   var vid = $("#heroVideo");
   if (vid) {
+    var ready = function () { vid.classList.add("is-ready"); };
+    if (vid.readyState >= 3) ready(); else { vid.addEventListener("canplay", ready, { once: true }); setTimeout(ready, 2500); }
     if (reduce) vid.pause();
     else if ("IntersectionObserver" in window) {
       new IntersectionObserver(function (en) {

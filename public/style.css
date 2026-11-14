@@ -675,3 +675,22 @@ html.lenis, html.lenis body { height: auto; }
 .name-card span { display: block; margin-top: 4px; font-size: 12px; color: rgba(0,0,0,.8); }
 .name-card span:empty { display: none; }
 .team-section.tight .team-grid { padding-top: 8px; }
+
+/* office-backdrop composite portraits (team + partners) */
+.bio-expert img.portrait[src*="duo-"] { width: min(300px, 82vw); height: auto; aspect-ratio: 1080 / 1064; object-fit: contain; box-shadow: none; border-radius: 0; background: #fff; }
+@media (min-width: 768px) { .bio-expert img.portrait[src*="duo-"] { width: 340px; height: auto; } }
+.team-card .photo img[src*="duo-"] { width: 100%; max-width: 270px; object-fit: contain; object-position: center; background: #fff; border-radius: 0; }
+
+/* hero video: themed frame, soft fade-in once playing, GPU-smooth */
+.hero-media { position: relative; background: linear-gradient(135deg, #e4fcfd, #d9eef0); box-shadow: 0 24px 60px -28px rgba(14,58,92,.35); }
+.hero-media::after { content: ""; position: absolute; inset: 0; pointer-events: none; background: linear-gradient(180deg, rgba(228,252,253,.0) 55%, rgba(243,254,254,.55) 100%), linear-gradient(135deg, rgba(20,128,138,.10), rgba(14,58,92,.06)); }
+.hero-media video { transform: translateZ(0); backface-visibility: hidden; opacity: 0; transition: opacity .8s ease; }
+.hero-media video.is-ready { opacity: 1; }
+@media (prefers-reduced-motion: reduce) { .hero-media video { opacity: 1; transition: none; } }
+
+/* highlighted names + degrees on team cards (matches reference) */
+.name-card b { color: var(--navy); font-size: 15px; letter-spacing: .01em; }
+.name-card span:first-of-type { color: #55626c; font-size: 12px; }
+.name-card span + span { display: inline-block; margin-top: 8px; padding: 4px 12px; border-radius: 999px; background: #e4fcfd; color: #14808a; font-weight: 600; font-size: 12px; line-height: 1.35; box-shadow: inset 0 0 0 1px rgba(20,128,138,.18); }
+.name-card span + span:empty { display: none; }
+@media (max-width: 480px) { .name-card { padding: 14px 8px; } .name-card b { font-size: 13.5px; } .name-card span + span { font-size: 11px; padding: 4px 10px; } }
